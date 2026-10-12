@@ -26,7 +26,11 @@ interface IDraft {
 }
 
 const operatorEquals: IOperator = { name: 'is', operator: '=', multi: false };
-const operatorNotEquals: IOperator = { name: 'is not', operator: '!=', multi: false };
+const operatorNotEquals: IOperator = {
+  name: 'is not',
+  operator: '!=',
+  multi: false,
+};
 const operatorOr: IOperator = {
   name: 'is one of',
   operator: '||',
@@ -226,12 +230,12 @@ const ProjectInputFilter = ({
             <span className="border-border text-tertiary border-x px-2 py-1">
               {token.operator.name}
             </span>
-            <span className="px-2 py-1 text-white">
+            <span className="bg-white/5 px-2 py-1 text-white/70">
               {token.values.join(', ')}
             </span>
             <button
               aria-label={`Remove ${token.attribute} filter`}
-              className="border-border flex h-full cursor-pointer items-center border-l px-1.5 text-white/40 hover:text-white"
+              className="flex h-full cursor-pointer items-center px-1.5 text-white/40 hover:text-white"
               onClick={(e) => {
                 e.stopPropagation();
                 commit(tokens.filter((_, idx) => idx !== i));
