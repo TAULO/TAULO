@@ -41,7 +41,7 @@ const operatorAnd: IOperator = {
 const attributes: IAttribute[] = [
   {
     name: 'Language',
-    operators: [operatorEquals, operatorNotEquals, operatorOr, operatorAnd],
+    operators: [operatorOr, operatorAnd],
     values: allUniqTechStacks.map((language) => language.name),
   },
   {
