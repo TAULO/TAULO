@@ -1,17 +1,23 @@
 import ProjectsItem from './ProjectsItem.tsx';
-import { projects } from './project.data.ts';
+import { IProject, projects } from './project.data.ts';
 import ProjectInputFilter from './ProjectInputFilter.tsx';
+import { useState } from 'react';
+import { filterProjects } from './ProjectInputFilter.tsx';
 
 const ProjectsV2 = () => {
+  const [allProjects, setAllProjects] = useState<IProject[]>(projects);
+
   return (
     <div className={'flex flex-col gap-4'}>
-      <ProjectInputFilter></ProjectInputFilter>
+      <ProjectInputFilter
+        onChange={(tokens) => setAllProjects(filterProjects(tokens))}
+      ></ProjectInputFilter>
       <div
         className={
           'grid w-full grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3'
         }
       >
-        {projects.map((project, index) => {
+        {allProjects.map((project, index) => {
           const delay = (index % 3) * 150;
           return (
             <div data-aos="zoom-in-up" data-aos-delay={delay} key={index}>
