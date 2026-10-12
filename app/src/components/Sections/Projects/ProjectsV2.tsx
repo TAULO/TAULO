@@ -20,7 +20,7 @@ const ProjectsV2 = () => {
         {allProjects.map((project, index) => {
           return (
             <div key={index}>
-              <ProjectsItem {...project} selectedStacks={[]} />
+              <ProjectsItem {...project} />
             </div>
           );
         })}

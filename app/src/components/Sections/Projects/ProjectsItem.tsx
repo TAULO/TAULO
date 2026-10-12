@@ -2,13 +2,9 @@ import { IProject } from './project.data';
 import { useModal } from '../../UI/Modal/ModalProvider.tsx';
 
 const ProjectsItem = ({
-  selectedStacks,
   ...project
-}: IProject & { selectedStacks: React.JSX.Element[] }) => {
+}: IProject) => {
   const { openModal } = useModal<IProject>('project-modal');
-
-  const stackIsSelected = (techSvg: React.JSX.Element) =>
-    selectedStacks.includes(techSvg);
 
   return (
     <div
@@ -71,11 +67,6 @@ const ProjectsItem = ({
           {project.techStack.map((stack, index) => (
             <div
               key={index}
-              className={`size-5 shrink-0 text-white ${
-                selectedStacks.length > 0 && !stackIsSelected(stack.svg)
-                  ? 'animate-infinite animate-bounce'
-                  : 'animate-none'
-              }`}
             >
               {stack.svg}
             </div>
