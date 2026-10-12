@@ -1,3 +1,5 @@
+import { projects, allUniqTechStacks } from './project.data.ts';
+
 interface IOperator {
   name: string;
   operator: string;
@@ -10,7 +12,8 @@ interface IAttribute {
 }
 
 const ProjectInputFilter = () => {
-  const projects = [];
+  const projectNames = projects.map((project) => project.name);
+  const languageNames = allUniqTechStacks.map((language) => language.name);
 
   const operatorEquals: IOperator = {
     name: 'Is',
@@ -43,19 +46,21 @@ const ProjectInputFilter = () => {
     {
       name: 'Language',
       operators,
-      values: [],
+      values: languageNames,
     },
     {
       name: 'Title',
       operators: [operatorEquals],
-      values: [],
+      values: projectNames,
     },
     {
       name: 'State',
       operators: [operatorEquals],
-      values: [],
+      values: ['In Production', 'Abandon', 'Deprecated', 'In development'], 
     },
   ];
+
+  console.log(attributes)
 
   return (
     <div>

@@ -5,7 +5,6 @@ import Experience from './components/Sections/Experience/Experience.tsx';
 import { useRef } from 'react';
 import Title from './components/UI/Title/Title.tsx';
 import GithubContribution from './components/UI/GithubContribution';
-import Projects from './components/Sections/Projects/Projects.tsx';
 import { ModalProvider } from './components/UI/Modal/ModalProvider.tsx';
 import ModalProject from './components/UI/Modal/ModalProject.tsx';
 import ModalGithub from './components/UI/Modal/ModalGithub.tsx';
@@ -15,6 +14,7 @@ import TechStackConstellation from './components/Sections/TechStack/TechStackCon
 import AboutMe from './components/Sections/AboutMe';
 import Footer from './components/Sections/Footer';
 import Socials from './components/UI/Socials';
+import ProjectsV2 from './components/Sections/Projects/ProjectsV2.tsx';
 
 function App() {
   const techStackRef = useRef<HTMLElement>(null);
@@ -51,7 +51,8 @@ function App() {
             data-aos={'fade'}
           >
             <Title title={'Projects'} number={'03'}></Title>
-            <Projects></Projects>
+            <ProjectsV2></ProjectsV2>
+            {/*<Projects></Projects>*/}
           </section>
           <section
             ref={aboutMeRef}
