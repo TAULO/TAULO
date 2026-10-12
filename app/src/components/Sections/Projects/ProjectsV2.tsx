@@ -18,9 +18,8 @@ const ProjectsV2 = () => {
         }
       >
         {allProjects.map((project, index) => {
-          const delay = (index % 3) * 150;
           return (
-            <div data-aos="zoom-in-up" data-aos-delay={delay} key={index}>
+            <div key={index}>
               <ProjectsItem {...project} selectedStacks={[]} />
             </div>
           );
