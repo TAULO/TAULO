@@ -67,6 +67,7 @@ const ProjectsItem = ({
           {project.techStack.map((stack, index) => (
             <div
               key={index}
+              className={'size-5 shrink-0 text-white'}
             >
               {stack.svg}
             </div>
