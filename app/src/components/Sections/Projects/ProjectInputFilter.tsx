@@ -1,5 +1,10 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { projects, allUniqTechStacks, IProject } from './project.data.ts';
+import {
+  projects,
+  allUniqTechStacks,
+  IProject,
+  ProjectStatus,
+} from './project.data.ts';
 
 interface IOperator {
   name: string;
@@ -7,10 +12,10 @@ interface IOperator {
   multi: boolean;
 }
 
-interface IAttribute {
+interface IAttribute<T> {
   name: string;
   operators: IOperator[];
-  values: string[];
+  values: Array<T>;
 }
 
 export interface IFilterToken {
@@ -19,8 +24,8 @@ export interface IFilterToken {
   values: string[];
 }
 
-interface IDraft {
-  attribute?: IAttribute;
+interface IDraft<T> {
+  attribute?: IAttribute<T>;
   operator?: IOperator;
   values: string[];
 }
@@ -42,23 +47,25 @@ const operatorAnd: IOperator = {
   multi: true,
 };
 
-const attributes: IAttribute[] = [
-  {
-    name: 'Language',
-    operators: [operatorOr, operatorAnd],
-    values: allUniqTechStacks.map((language) => language.name),
-  },
-  {
-    name: 'Title',
-    operators: [operatorEquals, operatorNotEquals, operatorOr],
-    values: projects.map((project) => project.name),
-  },
-  {
-    name: 'State',
-    operators: [operatorEquals, operatorNotEquals],
-    values: ['In Production', 'In development'],
-  },
-];
+const attributeLanguage: IAttribute<string> = {
+  name: 'Language',
+  operators: [operatorOr, operatorAnd],
+  values: allUniqTechStacks.map((language) => language.name),
+};
+
+const attributeTitle: IAttribute<string> = {
+  name: 'Title',
+  operators: [operatorEquals, operatorNotEquals, operatorOr],
+  values: projects.map((project) => project.name),
+};
+
+const attributeState: IAttribute<ProjectStatus> = {
+  name: 'State',
+  operators: [operatorEquals, operatorNotEquals],
+  values: ['In Production', 'In Development', 'Abandoned', 'On Hold'],
+};
+
+const attributes = [attributeLanguage, attributeTitle, attributeState];
 
 const matchesToken = (project: IProject, token: IFilterToken) => {
   let owned: string[];
@@ -70,8 +77,7 @@ const matchesToken = (project: IProject, token: IFilterToken) => {
       owned = [project.name];
       break;
     case 'State':
-      const state = project.hrefLive ? 'In Production' : 'In development';
-      owned = [state];
+      owned = [project.projectStatus];
       break;
     default:
       return true;
@@ -99,7 +105,7 @@ const ProjectInputFilter = ({
   onChange?: (tokens: IFilterToken[]) => void;
 }) => {
   const [tokens, setTokens] = useState<IFilterToken[]>([]);
-  const [draft, setDraft] = useState<IDraft>({ values: [] });
+  const [draft, setDraft] = useState<IDraft<string>>({ values: [] });
   const [query, setQuery] = useState('');
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(0);

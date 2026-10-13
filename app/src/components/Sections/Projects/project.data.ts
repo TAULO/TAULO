@@ -37,7 +37,7 @@ interface IProjectArchitecture {
   architecture?: string;
 }
 
-type ProjectStatus = 'In Development' | 'In Production' | 'On Hold' | 'Abandoned';
+export type ProjectStatus = 'In Development' | 'In Production' | 'On Hold' | 'Abandoned';
 
 const budgetpipeImages = useProjectAssets('budgetpipe');
 const athleticaImages = useProjectAssets('athletica');
