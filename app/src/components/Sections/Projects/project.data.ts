@@ -29,12 +29,15 @@ export interface IProject {
   techStack: Array<{ svg: JSX.Element; name: string }>;
   images: Array<{ src: string; alt: string }>;
   architecture?: IProjectArchitecture;
+  projectStatus: ProjectStatus;
 }
 
 interface IProjectArchitecture {
   classDiagram?: string;
   architecture?: string;
 }
+
+type ProjectStatus = 'In Development' | 'In Production' | 'On Hold' | 'Abandoned';
 
 const budgetpipeImages = useProjectAssets('budgetpipe');
 const athleticaImages = useProjectAssets('athletica');
@@ -111,6 +114,7 @@ const budgetpipeProject: IProject = {
     },
   ],
   images: budgetpipeImages,
+  projectStatus: 'In Production',
 };
 
 const athleticaProject: IProject = {
@@ -161,6 +165,8 @@ const athleticaProject: IProject = {
   architecture: {
     architecture: athelticaArchitecture,
   },
+
+  projectStatus: 'In Development',
 };
 
 const heyShortyProject: IProject = {
@@ -188,6 +194,7 @@ const heyShortyProject: IProject = {
     },
   ],
   images: shortyImages,
+  projectStatus: 'In Production',
 };
 
 const kanplaAPIProject: IProject = {
@@ -207,6 +214,7 @@ const kanplaAPIProject: IProject = {
     },
   ],
   images: kanplaAPIImages,
+  projectStatus: 'In Production',
 };
 
 const kanplaRaycastExtenstionProject: IProject = {
@@ -225,6 +233,7 @@ const kanplaRaycastExtenstionProject: IProject = {
     },
   ],
   images: kanplaRaycastExtenstionImages,
+  projectStatus: 'In Production',
 };
 
 const kanplaMCPProject: IProject = {
@@ -243,6 +252,7 @@ const kanplaMCPProject: IProject = {
     },
   ],
   images: kanplaMCPImages,
+  projectStatus: 'In Production',
 };
 
 const hvordanErVejretProject: IProject = {
@@ -266,6 +276,7 @@ const hvordanErVejretProject: IProject = {
     },
   ],
   images: hvordanErVejretImages,
+  projectStatus: 'Abandoned',
 };
 
 const biavlerProject: IProject = {
@@ -292,6 +303,7 @@ const biavlerProject: IProject = {
     },
   ],
   images: biavlerImages,
+  projectStatus: 'Abandoned',
 };
 
 const gitSnakeProject: IProject = {
@@ -314,6 +326,7 @@ const gitSnakeProject: IProject = {
     },
   ],
   images: gitSnakeImages,
+  projectStatus: 'In Production',
 };
 
 const gitGraffitiProject: IProject = {
@@ -328,6 +341,7 @@ const gitGraffitiProject: IProject = {
     },
   ],
   images: gitGraffitiImages,
+  projectStatus: 'In Production',
 };
 
 const adSkipperProject: IProject = {
@@ -350,6 +364,7 @@ const adSkipperProject: IProject = {
     },
   ],
   images: skipAdsImages,
+  projectStatus: 'In Production',
 };
 
 // @ts-ignore
