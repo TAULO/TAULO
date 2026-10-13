@@ -13,16 +13,18 @@ interface IOperator {
 }
 
 interface IAttribute<T> {
-  name: string;
+  name: SupportedAttributes;
   operators: IOperator[];
   values: Array<T>;
 }
 
 export interface IFilterToken {
-  attribute: string;
+  attribute: SupportedAttributes;
   operator: IOperator;
   values: string[];
 }
+
+type SupportedAttributes = 'Tech Stack' | 'Title' | 'State';
 
 interface IDraft<T> {
   attribute?: IAttribute<T>;
@@ -47,10 +49,10 @@ const operatorAnd: IOperator = {
   multi: true,
 };
 
-const attributeLanguage: IAttribute<string> = {
-  name: 'Language',
+const attributeTechStack: IAttribute<string> = {
+  name: 'Tech Stack',
   operators: [operatorOr, operatorAnd],
-  values: allUniqTechStacks.map((language) => language.name),
+  values: allUniqTechStacks.map((stack) => stack.name),
 };
 
 const attributeTitle: IAttribute<string> = {
@@ -65,12 +67,12 @@ const attributeState: IAttribute<ProjectStatus> = {
   values: ['In Production', 'In Development', 'Abandoned', 'On Hold'],
 };
 
-const attributes = [attributeLanguage, attributeTitle, attributeState];
+const attributes = [attributeTechStack, attributeTitle, attributeState];
 
 const matchesToken = (project: IProject, token: IFilterToken) => {
   let owned: string[];
   switch (token.attribute) {
-    case 'Language':
+    case 'Tech Stack':
       owned = project.techStack.map((stack) => stack.name);
       break;
     case 'Title':
